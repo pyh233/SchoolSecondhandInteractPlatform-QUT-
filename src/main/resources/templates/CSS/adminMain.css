@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+#menu {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+#menu a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+#menu a:hover {
+    text-decoration: underline;
+}
+#content {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background-color: white;
+    min-height: 600px;
+}
+iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}

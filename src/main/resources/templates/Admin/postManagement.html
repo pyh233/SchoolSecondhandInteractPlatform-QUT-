@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="../CSS/postManagement.css ">
+</head>
+<body>
+<h1>帖子管理</h1>
+<h2 th:text="${page}"></h2>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>标题</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- 示例数据，可以通过AJAX加载真实数据 -->
+  <tr>
+    <td>1</td>
+    <td>post1</td>
+    <td><button>编辑</button> <button>删除</button></td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>post2</td>
+    <td><button>编辑</button> <button>删除</button></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

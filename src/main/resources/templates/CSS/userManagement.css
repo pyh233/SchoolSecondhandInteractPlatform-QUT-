@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 20px; /* Add margin top for spacing */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+th {
+    background-color: #333;
+    color: white;
+    text-align: left; /* Align text to left in header cells */
+}
+
+td button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+td button:hover {
+    background-color: #45a049;
+}
+
+/* 分页样式优化 */
+.tcdPageCode {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.tcdPageCode a, .tcdPageCode span {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 3px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    color: #007bff;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tcdPageCode a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.tcdPageCode span.current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    cursor: default;
+}

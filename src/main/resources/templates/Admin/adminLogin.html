@@ -1,0 +1,24 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>欢迎登陆</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="../CSS/adminLogin.css ">
+</head>
+
+<body>
+<form action="/adminlogin" class="login" method="post" id="loginForm">
+  <h1>管理员登录</h1>
+  <input type="text" name="aname" placeholder="请输入用户名" required="required"/>
+  <input type="password" name="apass" placeholder="请输入密码" required="required"/>
+  <input type="submit" value="登陆" />
+  <p><span th:text="${msg}"></span></p>
+</form>
+
+</body>
+<script>
+
+
+</script>
+</html>
