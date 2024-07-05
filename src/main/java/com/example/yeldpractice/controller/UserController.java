@@ -44,7 +44,6 @@ public class UserController {
     @GetMapping("/Admin/deleteOneUser")
     public String deleteOneUser(int uid){
         int result = userDao.remove(uid);
-        // 前面设置了page处理方法 不必添加参数了。
         return "redirect:/Admin/userManagement";
     }
     // 修改用户跳转查询

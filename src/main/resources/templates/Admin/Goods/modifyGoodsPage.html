@@ -1,0 +1,107 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../CSS/modifyPage.css ">
+</head>
+
+<body>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="page-header">
+      <h1>
+        <small>修改商品</small>
+      </h1>
+    </div>
+    <form class="form-horizontal" action="/Admin/Goods/modify"
+          method="post" enctype="multipart/form-data">
+      <fieldset>
+
+        <div class="control-group">
+          <label class="control-label" for="gname">商品名</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="gname" name="gname" th:value="${modifyGood.gname}"/>
+            <span id="sp" style="color:red"></span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="gprofile">商品简介</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="gprofile" name="gprofile" th:value="${modifyGood.gprofile}"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="gprice">商品价格</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="gprice" name="gprice" th:value="${modifyGood.gprice}"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="file">图片</label>
+          <div class="controls">
+            <input type="file" class="input-xlarge" id="file" name="file"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="file">图片</label>
+          <div class="controls">
+            <img th:src="@{${modifyGood.gimg}}" width="100px" height="100px"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="uname">持有者用户名</label>
+        <div class="controls">
+          <span id="uname" th:text="${modifyGood.user.uname}"></span>
+<!--          <input type="text" class="input-xlarge" id="uname" name="uname" th:value="${modifyGood.user.uname}"/>-->
+        </div>
+      </div>
+
+        <div class="control-group">
+        <label class="control-label" for="utel">持有者电话</label>
+        <div class="controls">
+          <span id="utel" th:text="${modifyGood.user.utel}"></span>
+<!--          <input type="text" class="input-xlarge" id="utel" name="utel" th:value="${modifyGood.user.utel}"/>-->
+        </div>
+      </div>
+
+        <div class="control-group">
+        <label class="control-label" for="uemail">持有者邮箱</label>
+        <div class="controls">
+          <span id="uemail" th:text="${modifyGood.user.uemail}"></span>
+<!--          <input type="text" class="input-xlarge" id="uemail" name="uemail" th:value="${modifyGood.user.uemail}"/>-->
+        </div>
+      </div>
+
+        <div class="form-actions">
+          <input type="submit" class="btn btn-success btn-large" value="保存"/>
+          <a class="btn" href="/Admin/Goods/addCancel">取消</a>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+</div>
+</body>
+</html>
+<script src="../../js/jquery.js"></script>
+
+<script src="../../js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.dropdown-menu li a').hover(function () {
+      $(this).children('i').addClass('icon-white');
+    }, function () {
+      $(this).children('i').removeClass('icon-white');
+    });
+
+    if ($(window).width() > 760) {
+      $('tr.list-users td div ul').addClass('pull-right');
+    }
+  });
+</script>

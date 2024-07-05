@@ -1,0 +1,82 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../CSS/modifyPage.css ">
+</head>
+
+<body>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="page-header">
+      <h1>
+        <small>添加商品</small>
+      </h1>
+    </div>
+    <form class="form-horizontal" action="/Admin/Goods/addGoods"
+          method="post" enctype="multipart/form-data">
+      <fieldset>
+
+        <div class="control-group">
+          <label class="control-label" for="gname">商品名</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="gname" name="gname" required/>
+            <span id="sp" style="color:red"></span>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="gprofile">商品简介</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="gprofile" name="gprofile" required/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="gprice">商品价格</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" id="gprice" name="gprice" required/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="file">商品图片</label>
+          <div class="controls">
+            <input type="file" class="input-xlarge" id="file" name="file" required/>
+          </div>
+
+        </div><div class="control-group">
+        <label class="control-label" for="uname">用户名</label>
+        <div class="controls">
+          <input type="text" class="input-xlarge" id="uname" name="uname" required/>
+        </div>
+      </div>
+
+        <div class="form-actions">
+          <input type="submit" class="btn btn-success btn-large" value="保存"/>
+          <a class="btn" href="/Admin/Goods/addCancel">取消</a>
+        </div>
+      </fieldset>
+    </form>
+
+  </div>
+</div>
+</body>
+</html>
+<script src="../../js/jquery.js"></script>
+
+<script src="../../js/bootstrap.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.dropdown-menu li a').hover(function () {
+      $(this).children('i').addClass('icon-white');
+    }, function () {
+      $(this).children('i').removeClass('icon-white');
+    });
+
+    if ($(window).width() > 760) {
+      $('tr.list-users td div ul').addClass('pull-right');
+    }
+  });
+</script>

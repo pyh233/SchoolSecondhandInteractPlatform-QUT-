@@ -11,5 +11,6 @@ public class Post {
     private int pid;
     private String ptitle;
     private String profile;
+    private String pcontent;
     private Goods goods;
 }

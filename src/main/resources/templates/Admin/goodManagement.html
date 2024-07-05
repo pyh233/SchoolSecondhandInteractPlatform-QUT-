@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Good Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="../CSS/postManagement.css ">
+    <link rel="stylesheet" href="../CSS/userManagement.css ">
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.page.js"></script>
@@ -13,16 +13,18 @@
 <body>
 <h1>商品管理</h1>
 <div style="margin-bottom: 20px; text-align: right;">
-    <a href="www.baidu.com" class="btn btn-primary">添加商品</a>
+    <a href="/Admin/Goods/toAddGoodPage" class="btn btn-primary">添加商品</a>
 </div>
 <table>
     <thead>
     <tr>
         <th>GID</th>
         <th>商品名(Gname)</th>
+        <th>商品简介(Gprofile)</th>
         <th>商品价格(Gprice)</th>
         <th>商品图片(Gimg)</th>
-        <th>持有者(UserName)</th>
+        <th>持有者(Owner)</th>
+        <th>持有者TEL(OwnerTEL)</th>
         <th>操作(Operation)</th>
     </tr>
     </thead>
@@ -30,12 +32,14 @@
     <tr class="list-users" th:each="good,iter:${pageInfo.list}">
         <td th:text="${good.gid}"></td>
         <td th:text="${good.gname}"></td>
+        <td th:text="${good.gprofile}"></td>
         <td th:text="${good.gprice}"></td>
         <td><img th:src="@{${good.gimg}}" width="100px" height="100px"/> </td>
         <td th:text="${good.user.uname}"></td>
-<!--        <td><a th:href="@{'/Admin/setOneUser?uid='+${user.uid}}" class="label label-important">修改</a><span-->
-<!--                class="label label-success">/</span><a th:href="@{'/Admin/deleteOneUser?uid='+${user.uid}}"-->
-<!--                                                       class="label label-important">删除</a></td>-->
+        <td th:text="${good.user.utel}"></td>
+        <td><a th:href="@{'/Admin/Goods/setGoods?gid='+${good.gid}}" class="label label-important">修改</a><span
+                class="label label-success">/</span><a th:href="@{'/Admin/Goods/deleteGoods?gid='+${good.gid}}"
+                                                       class="label label-important">删除</a></td>
     </tr>
     </tbody>
 </table>
