@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Main Page</title>
+    <title>管理员主页面</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="../CSS/adminMain.css ">
+    <link rel="stylesheet" href="../CSS/adminMain.css">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.page.js"></script>
 </head>
 <body>
 <div id="menu">
@@ -14,24 +17,35 @@
     <a href="#" id="postManagementLink">帖子管理</a>
 </div>
 <div id="content">
+    <div id="placeholderText">
+        请选择一个模块...
+    </div>
     <iframe id="contentFrame" src=""></iframe>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div id="footer">
+    <span>© copyright pyh233-rlj-sfx</span>
+</div>
+
 <script>
     $(document).ready(function() {
+        function updateContent(url) {
+            $('#contentFrame').attr('src', url);
+            $('#placeholderText').hide();
+        }
+
         $('#userManagementLink').on('click', function(event) {
             event.preventDefault();
-            $('#contentFrame').attr('src', '/Admin/userManagement?page=1');
+            updateContent('/Admin/userManagement?page=1');
         });
 
         $('#goodManagementLink').on('click', function(event) {
             event.preventDefault();
-            $('#contentFrame').attr('src', '/Admin/goodManagement?page=1');
+            updateContent('/Admin/goodManagement?page=1');
         });
 
         $('#postManagementLink').on('click', function(event) {
             event.preventDefault();
-            $('#contentFrame').attr('src', '/Admin/postManagement?page=1');
+            updateContent('/Admin/postManagement?page=1');
         });
     });
 </script>

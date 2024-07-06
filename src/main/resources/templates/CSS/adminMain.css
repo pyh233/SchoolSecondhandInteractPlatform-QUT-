@@ -1,32 +1,85 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1)), linear-gradient(45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.1) 75%, rgba(0, 0, 0, 0.1));
+    background-size: 40px 40px;
 }
+
 #menu {
-    background-color: #333;
+    background: linear-gradient(90deg, #4a90e2, #9013fe);
     color: white;
     padding: 10px 0;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* 保证菜单在顶部 */
 }
+
 #menu a {
     color: white;
-    margin: 0 15px;
+    margin: 0 20px;
     text-decoration: none;
     font-weight: bold;
+    display: inline-block;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
 }
+
 #menu a:hover {
-    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
+
 #content {
     padding: 20px;
-    border-top: 1px solid #ddd;
     background-color: white;
-    min-height: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 95%;
+    max-width: 1200px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    z-index: 1; /* 保证内容区域在菜单和底部导航之下 */
+    height: 700px; /* 调整内容区域高度 */
 }
+
+#placeholderText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #999;
+    z-index: -1; /* 将占位文本移到内容区域背后 */
+}
+
 iframe {
     width: 100%;
-    height: 600px;
+    height: 90%; /* 调整高度 */
     border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#footer {
+    background: linear-gradient(90deg, #9013fe, #4a90e2); /* 左到右渐变色 */
+    color: white;
+    padding: 10px 0; /* 减小高度 */
+    text-align: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+#footer span {
+    color: white;
+    font-weight: bold;
+    display: block;
+    padding: 5px 0; /* 减小高度 */
+    transition: all 0.3s ease;
 }

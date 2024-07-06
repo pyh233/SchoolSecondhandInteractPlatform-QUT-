@@ -12,5 +12,5 @@ public class Post {
     private String ptitle;
     private String profile;
     private String pcontent;
-    private Goods goods;
+    private User user;
 }

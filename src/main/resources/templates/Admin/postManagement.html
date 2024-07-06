@@ -1,36 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post Management</title>
+  <title>帖子管理</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-  <link rel="stylesheet" href="../CSS/postManagement.css ">
+  <link rel="stylesheet" href="../CSS/postManagement.css">
+  <script src="../js/jquery.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.page.js"></script>
 </head>
 <body>
 <h1>帖子管理</h1>
-<h2 th:text="${page}"></h2>
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>标题</th>
-    <th>操作</th>
-  </tr>
-  </thead>
-  <tbody>
-  <!-- 示例数据，可以通过AJAX加载真实数据 -->
-  <tr>
-    <td>1</td>
-    <td>post1</td>
-    <td><button>编辑</button> <button>删除</button></td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>post2</td>
-    <td><button>编辑</button> <button>删除</button></td>
-  </tr>
-  </tbody>
-</table>
+<div style="margin-bottom: 20px; text-align: right;">
+  <a href="#" class="btn btn-primary">欢迎，管理员！</a>
+</div>
+<div class="post-container">
+  <div class="post-item" th:each="post : ${pageInfo.list}">
+    <div>
+      <strong>PID:</strong> <span th:text="${post.pid}"></span>
+    </div>
+    <div>
+      <strong>标题(Ptitle):</strong> <span th:text="${post.ptitle}"></span>
+    </div>
+    <div>
+      <strong>简介(Profile):</strong> <span th:text="${post.profile}"></span>
+    </div>
+    <div>
+      <strong>用户名(Uname):</strong> <span th:text="${post.user.uname}"></span>
+    </div>
+    <div>
+      <strong>用户电话(Utel):</strong> <span th:text="${post.user.utel}"></span>
+    </div>
+    <div class="btn btn-danger delete-button" th:attr="onclick='confirmDelete(this, \'' + ${post.pid} + '\')'">&times;</div>
+  </div>
+</div>
+
+<div class="tcdPageCode">
+</div>
+
+<script>
+  $(".tcdPageCode").createPage({
+    pageCount: [[${pageInfo.pages}]],
+    current: [[${pageInfo.pageNum}]],
+    backFn: function (p) {
+      window.location.href = '/Admin/postManagement?page=' + p;
+    }
+  });
+
+  function confirmDelete(element, pid) {
+    if (confirm("确定要删除这条帖子吗？")) {
+      window.location.href = '/Admin/Post/deletePost?pid=' + pid;
+    }
+  }
+</script>
 </body>
 </html>

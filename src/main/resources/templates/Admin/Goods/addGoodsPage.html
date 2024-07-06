@@ -1,71 +1,68 @@
-<!DOCTYPE html >
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../../CSS/modifyPage.css ">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Good</title>
+  <link rel="stylesheet" href="../../CSS/addGoodPage.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 <body>
 
-<div class="container-fluid">
-  <div class="row-fluid">
-    <div class="page-header">
-      <h1>
-        <small>添加商品</small>
-      </h1>
-    </div>
-    <form class="form-horizontal" action="/Admin/Goods/addGoods"
-          method="post" enctype="multipart/form-data">
-      <fieldset>
-
-        <div class="control-group">
-          <label class="control-label" for="gname">商品名</label>
-          <div class="controls">
-            <input type="text" class="input-xlarge" id="gname" name="gname" required/>
-            <span id="sp" style="color:red"></span>
-          </div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h2 class="text-center">添加商品</h2>
         </div>
-
-        <div class="control-group">
-          <label class="control-label" for="gprofile">商品简介</label>
-          <div class="controls">
-            <input type="text" class="input-xlarge" id="gprofile" name="gprofile" required/>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="gprice">商品价格</label>
-          <div class="controls">
-            <input type="text" class="input-xlarge" id="gprice" name="gprice" required/>
-          </div>
-        </div>
-
-        <div class="control-group">
-          <label class="control-label" for="file">商品图片</label>
-          <div class="controls">
-            <input type="file" class="input-xlarge" id="file" name="file" required/>
-          </div>
-
-        </div><div class="control-group">
-        <label class="control-label" for="uname">用户名</label>
-        <div class="controls">
-          <input type="text" class="input-xlarge" id="uname" name="uname" required/>
+        <div class="card-body">
+          <form class="form-horizontal" action="/Admin/Goods/addGoods" method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+              <label for="gname" class="col-sm-3 col-form-label">商品名</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="gname" name="gname" required>
+                <span id="sp" style="color:red"></span>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="gprofile" class="col-sm-3 col-form-label">商品简介</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="gprofile" name="gprofile" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="gprice" class="col-sm-3 col-form-label">商品价格</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="gprice" name="gprice" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="file" class="col-sm-3 col-form-label">商品图片</label>
+              <div class="col-sm-9">
+                <input type="file" class="form-control" id="file" name="file" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="uname" class="col-sm-3 col-form-label">用户名</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="uname" name="uname" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-9 offset-sm-3">
+                <button type="submit" class="btn btn-success">保存</button>
+                <a class="btn btn-secondary" href="/Admin/Goods/addCancel">取消</a>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-
-        <div class="form-actions">
-          <input type="submit" class="btn btn-success btn-large" value="保存"/>
-          <a class="btn" href="/Admin/Goods/addCancel">取消</a>
-        </div>
-      </fieldset>
-    </form>
-
+    </div>
   </div>
 </div>
-</body>
-</html>
-<script src="../../js/jquery.js"></script>
 
+<script src="../../js/jquery.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
 <script>
   $(document).ready(function () {
@@ -80,3 +77,6 @@
     }
   });
 </script>
+
+</body>
+</html>

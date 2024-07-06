@@ -54,17 +54,6 @@ th {
     border-color: #0056b3;
 }
 
-.btn-warning {
-    background-color: #dc3545;
-    border: 1px solid #dc3545;
-    color: white;
-}
-
-.btn-warning:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
-}
-
 .btn-danger {
     background-color: #dc3545;
     border: 1px solid #dc3545;
@@ -102,4 +91,24 @@ th {
     color: white;
     border-color: #007bff;
     cursor: default;
+}
+
+.label {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 3px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.label-important {
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+    color: white;
+}
+
+.label-important:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
 }
