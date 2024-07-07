@@ -15,7 +15,6 @@ public class PostController {
     // 整个围绕postManagement跳转
     @Resource
     PostDao postDao;
-
     @GetMapping("/Admin/postManagement")
     public String showAllPosts(Integer page, Model model) {
         if (page == null || page == 0) {

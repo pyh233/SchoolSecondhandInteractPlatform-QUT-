@@ -22,10 +22,5 @@ public interface UserDao {
     public int remove(int uid);
     @Select("select count(*) from user")
     public int count();
-    // 用户成功登录(查询到用户数据返回)
-    @Select("select * from user where uname=#{uname} and upass=#{upass}")
-    public User userLoginSelect(User user);
-    // 用户注册检查用户名是否可用
-    @Select("select count(*) from user where uname=#{uname}")
-    public int registerCheck(String uname);
+
 }

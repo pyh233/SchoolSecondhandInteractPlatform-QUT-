@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -69,21 +70,5 @@ public class UserController {
     }
 
 
-    // 用户注册的时候检查用户名是否存在
-    @PostMapping("registerCheck")
-    public @ResponseBody int registerCheck(String uname){
-        // 返回1为存在用户名 返回0可以继续注册
-        return userDao.registerCheck(uname);
-    }
-    // 用户注册（请求添加用户添加的注册数据有uname,upass,utel,uemail）
-    @PostMapping("userRegister")
-    public @ResponseBody int userRegister(User user){
-        return userDao.add(user);
-    }
-    // 用户登入（登入成功后）
-    @PostMapping("userLoginIn")
-    // 登陆接口 返回null登陆失败（需要注册或者重新输入用户名或密码）
-    public @ResponseBody User userLoginIn(User user){
-        return userDao.userLoginSelect(user);
-    }
+
 }
