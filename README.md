@@ -546,11 +546,11 @@
     ```
 
     - 其他表相关方法(未扩展，未完善)：
-        - `selectUserByUname(String uname)`：根据用户名查询用户信息。
-        ```java
-        @Select("select * from user where uname=#{uname}")
-        public User selectUserByUname(String uname);
-        ```
+    - `selectUserByUname(String uname)`：根据用户名查询用户信息。
+    ```java
+    @Select("select * from user where uname=#{uname}")
+    public User selectUserByUname(String uname);
+    ```
 
 
 ### 10. `PostDao.java`
@@ -771,18 +771,18 @@
 
 - **作用**：商品信息数据转化类。
 - **关键类**：
-    - `GoodsTransfer`：将GoodsHelper转化为Goods类。
-  - **功能说明**：
-      -`public Goods transferToGoods(GoodsHelper goodsHelper)`:转化方法，可以将`GoodsHelper`转化为`Goods`
-      ```java
-      public Goods transferToGoods(GoodsHelper goodsHelper){
-          this.goods.setGname(goodsHelper.getGname());
-          this.goods.setGprofile(goodsHelper.getGprofile());
-          this.goods.setGprice(goodsHelper.getGprice());
-          this.goods.setGimg(goodsHelper.getGimg());
-          this.goods.setUser(this.user);
-          return this.goods;
-      }
+  - `GoodsTransfer`：将GoodsHelper转化为Goods类。
+- **功能说明**：
+  - `public Goods transferToGoods(GoodsHelper goodsHelper)`:转化方法，可以将`GoodsHelper`转化为`Goods`
+     ```java
+    public Goods transferToGoods(GoodsHelper goodsHelper){
+        this.goods.setGname(goodsHelper.getGname());
+        this.goods.setGprofile(goodsHelper.getGprofile());
+        this.goods.setGprice(goodsHelper.getGprice());
+        this.goods.setGimg(goodsHelper.getGimg());
+        this.goods.setUser(this.user);
+        return this.goods;
+    }
      ```
 
 ### 16. `AdminInterceptor.java`
@@ -791,7 +791,7 @@
 - **关键类**：
     - `AdminInterceptor`：实现了 `HandlerInterceptor` 接口，用于在处理请求之前拦截并验证管理员的访问权限。
 - **功能说明**：
-  `preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)`：在处理请求之前执行的方法，用于验证管理员访问权限。
+    - `preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)`：在处理请求之前执行的方法，用于验证管理员访问权限。
     ```java
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
