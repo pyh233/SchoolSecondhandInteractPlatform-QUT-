@@ -88,7 +88,7 @@ public class UserUsageController {
     }
 
     // 用户修改自己发布的商品信息
-    // TODO:设计图片上传
+    // TODO:未完成涉及图片上传，待完善。
     @PostMapping("setMyGood")
     public @ResponseBody int setMyGood(@RequestBody Goods goods){
         return userUseDao.setMyGood(goods);
