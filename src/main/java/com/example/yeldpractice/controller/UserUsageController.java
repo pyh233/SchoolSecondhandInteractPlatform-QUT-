@@ -10,10 +10,7 @@ import com.example.yeldpractice.pojo.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,76 +39,76 @@ public class UserUsageController {
     }
 
 
-    // 用户浏览所有商品
-    @GetMapping("userBrowserPosts")
-    public @ResponseBody PageInfo userBrowserPosts(int page){
+    // 用户浏览所有Post(√)
+    @PostMapping("userBrowserPosts")
+    public @ResponseBody PageInfo userBrowserPosts(@RequestParam int page){
         PageHelper.startPage(page,2);
         PageInfo pageInfo = new PageInfo(userUseDao.UserBrowserPosts());
         return pageInfo;
     }
-    // 用户浏览所有帖子
-    @GetMapping("userBrowserGoods")
-    public @ResponseBody PageInfo userBrowserGoods(int page){
+    // 用户浏览所有Good(√)
+    @PostMapping("userBrowserGoods")
+    public @ResponseBody PageInfo userBrowserGoods(@RequestParam int page){
         PageHelper.startPage(page,2);
         PageInfo pageInfo = new PageInfo(userUseDao.UserBrowserGoods());
         return pageInfo;
     }
-    // 用户浏览自己信息
+    // 用户浏览自己信息(√)
     @PostMapping("BrowserSelf")
     public @ResponseBody User browserMySelf(int uid){
         return userUseDao.selectSelf(uid);
     }
-    // 用户浏览自己所有的贴
+    // 用户浏览自己所有的贴(√)
     @PostMapping("browserSelfsPosts")
     public @ResponseBody List<Post> browserSelfsPosts(int uid){
         return userUseDao.selectSelfPosts(uid);
     }
-    // 用户浏览自己所有的商品
+    // 用户浏览自己所有的商品(√)
     @PostMapping("browserSelfsGoods")
     public @ResponseBody List<Goods> browserSelfsGoods(int uid){
         return userUseDao.selectSelfGoods(uid);
     }
-    // 用户发帖
+    // 用户发帖(?)
     @PostMapping("postPost")
     public @ResponseBody int postPost(@RequestBody Post post){
         return userUseDao.postPost(post);
     }
-    // 用户发布商品
+    // 用户发布商品(?)
     @PostMapping("postGood")
     public @ResponseBody int postGood(@RequestBody Goods goods){
         return userUseDao.postGood(goods);
     }
-    // 用户修改自己发布的帖子
+    // 用户修改自己发布的帖子(√)
     @PostMapping("setMyPost")
     public @ResponseBody int setMyPost(@RequestBody Post post){
         return userUseDao.setMyPost(post);
     }
 
-    // 用户修改自己发布的商品信息
+    // 用户修改自己发布的商品信息(?)
     // TODO:未完成涉及图片上传，待完善。
     @PostMapping("setMyGood")
     public @ResponseBody int setMyGood(@RequestBody Goods goods){
         return userUseDao.setMyGood(goods);
     }
 
-    // 用户删除自己的帖
+    // 用户删除自己的帖(√)
     @PostMapping("deleteMyPost")
     public @ResponseBody int deleteMyPost(int pid){
         return userUseDao.deleteMyPost(pid);
     }
 
-    // 用户删除自己的商品
+    // 用户删除自己的商品(√)
     @PostMapping("deleteMyGood")
     public @ResponseBody int deleteMyGood(int gid){
         return userUseDao.deleteMyGood(gid);
     }
 
-    // 用户在帖子下留言
+    // 用户在帖子下留言(√)
     @PostMapping("postComment")
     public @ResponseBody int postComment(@RequestBody CommentHelper commentHelper){
         return userUseDao.giveCommemts(commentHelper);
     }
-    // 用户浏览他人帖子（需要留言返回帖子）
+    // 用户浏览他人帖子（需要留言返回帖子）(√)
     @PostMapping("commentsShowOnPost")
     public @ResponseBody List<Comment> commentsShowOnPost(int pid){
         return userUseDao.getCommentsByPid(pid);

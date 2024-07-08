@@ -20,10 +20,40 @@ public interface UserUseDao {
     // 用户注册成功添加用户信息。
     @Insert("insert into user values (0,#{uname},#{upass},#{utel},#{uemail})")
     public int add(User user);
-
-    @Select("select * from post")
+    // 用户浏览所有Post
+    @Select("SELECT p.pid, p.ptitle, p.profile, p.pcontent, " +
+            "u.uid AS uid, u.uname AS uname, u.upass AS upass, u.utel AS utel, u.uemail AS uemail " +
+            "FROM post p " +
+            "JOIN User u ON p.puid = u.uid")
+    @Results({
+            @Result(property = "pid", column = "pid"),
+            @Result(property = "ptitle", column = "ptitle"),
+            @Result(property = "profile", column = "profile"),
+            @Result(property = "pcontent", column = "pcontent"),
+            @Result(property = "user.uid", column = "uid"),
+            @Result(property = "user.uname", column = "uname"),
+            @Result(property = "user.upass", column = "upass"),
+            @Result(property = "user.utel", column = "utel"),
+            @Result(property = "user.uemail", column = "uemail")
+    })
     public List<Post> UserBrowserPosts();
-    @Select("select * from Goods")
+    // 用户浏览所有goods
+    @Select("SELECT g.gid, g.gname, g.gprofile, g.gprice, g.gimg, " +
+            "u.uid AS uid, u.uname AS uname, u.upass AS upass, u.utel AS utel, u.uemail AS uemail " +
+            "FROM goods g " +
+            "JOIN User u ON g.uid = u.uid")
+    @Results({
+            @Result(property = "gid", column = "gid"),
+            @Result(property = "gname", column = "gname"),
+            @Result(property = "gprofile", column = "gprofile"),
+            @Result(property = "gprice", column = "gprice"),
+            @Result(property = "gimg", column = "gimg"),
+            @Result(property = "user.uid", column = "uid"),
+            @Result(property = "user.uname", column = "uname"),
+            @Result(property = "user.upass", column = "upass"),
+            @Result(property = "user.utel", column = "utel"),
+            @Result(property = "user.uemail", column = "uemail")
+    })
     public List<Goods> UserBrowserGoods();
     // 用户查询个人主页
     @Select("select * from user where uid=#{uid}")
@@ -64,10 +94,10 @@ public interface UserUseDao {
     })
     public List<Comment> getCommentsByPid(int pid);
     // 用户修改自己的某一个贴
-    @Update("update post set ptitle=#{ptitle},profile=#{profile},pcontent=#{pcontent} where pid=#{pid} and uid=#{user.uid}")
+    @Update("update post set ptitle=#{ptitle},profile=#{profile},pcontent=#{pcontent} where pid=#{pid} and puid=#{user.uid}")
     public int setMyPost(Post post);
     // 用户修改自己的某一个good(涉及上传图片)
-    @Update("update post set gname=#{gname},gprofile=#{gprofile},gprice=#{gprice} where gimg=#{gimg} and uid=#{user.uid}")
+    @Update("update post set gname=#{gname},gprofile=#{gprofile},gprice=#{gprice}, gimg=#{gimg} where gid=#{gid} and uid=#{user.uid}")
     public int setMyGood(Goods goods);
     // 用户删帖
     @Delete("delete from post where pid=#{pid}")
