@@ -61,12 +61,12 @@ public class UserUsageController {
     public @ResponseBody User browserMySelf(int uid){
         return userUseDao.selectSelf(uid);
     }
-    // 用户浏览自己的贴
+    // 用户浏览自己所有的贴
     @PostMapping("browserSelfsPosts")
     public @ResponseBody List<Post> browserSelfsPosts(int uid){
         return userUseDao.selectSelfPosts(uid);
     }
-    // 用户浏览自己的商品
+    // 用户浏览自己所有的商品
     @PostMapping("browserSelfsGoods")
     public @ResponseBody List<Goods> browserSelfsGoods(int uid){
         return userUseDao.selectSelfGoods(uid);
@@ -81,17 +81,30 @@ public class UserUsageController {
     public @ResponseBody int postGood(@RequestBody Goods goods){
         return userUseDao.postGood(goods);
     }
-    //TODO:用户修改自己发布的帖子
+    // 用户修改自己发布的帖子
+    @PostMapping("setMyPost")
+    public @ResponseBody int setMyPost(@RequestBody Post post){
+        return userUseDao.setMyPost(post);
+    }
 
+    // 用户修改自己发布的商品信息
+    // TODO:设计图片上传
+    @PostMapping("setMyGood")
+    public @ResponseBody int setMyGood(@RequestBody Goods goods){
+        return userUseDao.setMyGood(goods);
+    }
 
-    // TODO:用户修改自己发布的商品信息
+    // 用户删除自己的帖
+    @PostMapping("deleteMyPost")
+    public @ResponseBody int deleteMyPost(int pid){
+        return userUseDao.deleteMyPost(pid);
+    }
 
-
-    // TODO:用户删除自己的帖
-
-
-    // TODO:用户删除自己的商品
-
+    // 用户删除自己的商品
+    @PostMapping("deleteMyGood")
+    public @ResponseBody int deleteMyGood(int gid){
+        return userUseDao.deleteMyGood(gid);
+    }
 
     // 用户在帖子下留言
     @PostMapping("postComment")

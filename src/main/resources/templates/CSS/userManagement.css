@@ -76,9 +76,25 @@ th {
     border-color: #bd2130;
 }
 
-.tcdPageCode {
+
+.pagination-container {
     text-align: center;
     margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.tcdPageCode {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tcdPageCode a, .tcdPageCode span {

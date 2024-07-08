@@ -63,4 +63,16 @@ public interface UserUseDao {
             @Result(property = "post.pcontent", column = "pcontent")
     })
     public List<Comment> getCommentsByPid(int pid);
+    // 用户修改自己的某一个贴
+    @Update("update post set ptitle=#{ptitle},profile=#{profile},pcontent=#{pcontent} where pid=#{pid} and uid=#{user.uid}")
+    public int setMyPost(Post post);
+    // 用户修改自己的某一个good(涉及上传图片)
+    @Update("update post set gname=#{gname},gprofile=#{gprofile},gprice=#{gprice} where gimg=#{gimg} and uid=#{user.uid}")
+    public int setMyGood(Goods goods);
+    // 用户删帖
+    @Delete("delete from post where pid=#{pid}")
+    public int deleteMyPost(int pid);
+    // 用户删物品
+    @Delete("delete from post where gid=#{gid}")
+    public int deleteMyGood(int gid);
 }

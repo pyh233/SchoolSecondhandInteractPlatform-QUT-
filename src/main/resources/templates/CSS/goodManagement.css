@@ -3,6 +3,8 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
+    position: relative;
+    min-height: 100vh;
 }
 
 .container {
@@ -54,20 +56,45 @@ th {
     border-color: #0056b3;
 }
 
-.btn-danger {
+.label {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 3px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.label-important {
     background-color: #dc3545;
     border: 1px solid #dc3545;
     color: white;
 }
 
-.btn-danger:hover {
+.label-important:hover {
     background-color: #c82333;
     border-color: #bd2130;
 }
 
-.tcdPageCode {
+.pagination-container {
     text-align: center;
     margin-top: 20px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+}
+
+.tcdPageCode {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tcdPageCode a, .tcdPageCode span {
@@ -91,24 +118,4 @@ th {
     color: white;
     border-color: #007bff;
     cursor: default;
-}
-
-.label {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 3px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.label-important {
-    background-color: #dc3545;
-    border: 1px solid #dc3545;
-    color: white;
-}
-
-.label-important:hover {
-    background-color: #c82333;
-    border-color: #bd2130;
 }
