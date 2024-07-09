@@ -9,11 +9,17 @@ import com.example.yeldpractice.pojo.Post;
 import com.example.yeldpractice.pojo.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class UserUsageController {
@@ -53,32 +59,83 @@ public class UserUsageController {
         PageInfo pageInfo = new PageInfo(userUseDao.UserBrowserGoods());
         return pageInfo;
     }
-    // 用户浏览自己信息(√)
+    // 用户浏览自己信息(√)貌似没用到==没什么d用
     @PostMapping("BrowserSelf")
     public @ResponseBody User browserMySelf(int uid){
         return userUseDao.selectSelf(uid);
     }
+
     // 用户浏览自己所有的贴(√)
     @PostMapping("browserSelfsPosts")
-    public @ResponseBody List<Post> browserSelfsPosts(int uid){
+    public @ResponseBody List<Post> browserSelfsPosts(@RequestBody Map<String,Integer> pyload){
+        int uid = (int)pyload.get("uid");
         return userUseDao.selectSelfPosts(uid);
     }
     // 用户浏览自己所有的商品(√)
     @PostMapping("browserSelfsGoods")
-    public @ResponseBody List<Goods> browserSelfsGoods(int uid){
+    public @ResponseBody List<Goods> browserSelfsGoods(@RequestBody Map<String,Integer> pyload){
+        int uid = (int)pyload.get("uid");
         return userUseDao.selectSelfGoods(uid);
     }
-    // 用户发帖(?)
+
+
+    // 用户发帖(√)这个方法需要进行限制,防止用户插入过多数据
     @PostMapping("postPost")
     public @ResponseBody int postPost(@RequestBody Post post){
         return userUseDao.postPost(post);
     }
-    // 用户发布商品(?)
+    // 用户发布商品(?)(图片上传，前面以base64编码发来数据，需要在后台解码保存图片)
+    // TODO:图片编码格式无法传递.因此设置默认值拖鞋.jpg
     @PostMapping("postGood")
-    public @ResponseBody int postGood(@RequestBody Goods goods){
+    public int postGood(@RequestBody Goods goods,HttpSession session) {
+        // 处理图片上传,得到存储到数据库中的数据
+        String imagePath = saveImage(goods.getGimg(),session);
+
+        // 将图片路径设置到 goods 对象中，保存数据
+        if(goods.getGimg().equals("")){
+            imagePath="/img/OIP-C.jpg";
+        }
+        goods.setGimg(imagePath);
         return userUseDao.postGood(goods);
     }
+
+    // 保存图片到服务器
+    private String saveImage(String base64Image, HttpSession session) {
+        System.out.println("base64Image="+base64Image);
+        String imagePath = ""; // 初始化图片路径
+
+        try {
+            // 解码 base64 编码的图片数据并保存到服务器
+            byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(base64Image);
+            String imageName = UUID.randomUUID().toString() + ".jpg"; // 生成唯一的图片名
+
+
+            // 下面是保存文件
+            String path = "G:\\Java\\JavaWeb\\JWfileProjects\\yeldPractice\\src\\main\\resources\\templates\\img";
+            // 创建目录
+            File directory = new File(path);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            // 文件地址
+            String filePath = path + File.separator + imageName;
+            File imageFile = new File(filePath);
+            // 写入图片文件
+            FileUtils.writeByteArrayToFile(imageFile, imageBytes);
+
+
+            // 设置图片路径
+            imagePath = "/img/" + imageName; // 假设图片保存在 /img/ 目录下
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return imagePath;
+    }
     // 用户修改自己发布的帖子(√)
+    @PostMapping("selectPostByPid")
+    public @ResponseBody Post selectPostByPid(int pid){
+        return userUseDao.selectByPid(pid);
+    }
     @PostMapping("setMyPost")
     public @ResponseBody int setMyPost(@RequestBody Post post){
         return userUseDao.setMyPost(post);
