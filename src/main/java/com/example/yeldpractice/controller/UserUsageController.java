@@ -55,7 +55,7 @@ public class UserUsageController {
     // 用户浏览所有Good(√)
     @PostMapping("userBrowserGoods")
     public @ResponseBody PageInfo userBrowserGoods(@RequestParam int page){
-        PageHelper.startPage(page,2);
+        PageHelper.startPage(page,4);
         PageInfo pageInfo = new PageInfo(userUseDao.UserBrowserGoods());
         return pageInfo;
     }
@@ -84,13 +84,13 @@ public class UserUsageController {
     public @ResponseBody int postPost(@RequestBody Post post){
         return userUseDao.postPost(post);
     }
-    // 用户发布商品(?)(图片上传，前面以base64编码发来数据，需要在后台解码保存图片)
-    // TODO:图片编码格式无法传递.因此设置默认值拖鞋.jpg
+    // 用户发布商品(图片上传，前面以base64编码发来数据，需要在后台解码保存图片)
+    // 设置默认值拖鞋.jpg
     @PostMapping("postGood")
-    public int postGood(@RequestBody Goods goods,HttpSession session) {
+    public @ResponseBody int postGood(@RequestBody Goods goods,HttpSession session) {
         // 处理图片上传,得到存储到数据库中的数据
         String imagePath = saveImage(goods.getGimg(),session);
-
+        System.out.println(imagePath);
         // 将图片路径设置到 goods 对象中，保存数据
         if(goods.getGimg().equals("")){
             imagePath="/img/OIP-C.jpg";
@@ -101,7 +101,6 @@ public class UserUsageController {
 
     // 保存图片到服务器
     private String saveImage(String base64Image, HttpSession session) {
-        System.out.println("base64Image="+base64Image);
         String imagePath = ""; // 初始化图片路径
 
         try {
@@ -111,13 +110,26 @@ public class UserUsageController {
 
 
             // 下面是保存文件
+            // !!!!!!!!!!!!!!!!!!!!!!需要保存到两个位置很重要因为只有项目重构后temp里面才会存储东西
+            // 先保存临时文件
+            // 1.创建临时目录
+            String tempPath = session.getServletContext().getRealPath("img");
+            if(!new File(tempPath).exists()){
+                new File(tempPath).mkdirs();
+            }
+            // 2.上传临时文件
+            String tempImgFileURL = tempPath + File.separator + imageName;
+            File tmpImg = new File(tempImgFileURL);
+            FileUtils.writeByteArrayToFile(tmpImg,imageBytes);
+            // 再上传永久文件
+            // 1.创建永久目录
             String path = "G:\\Java\\JavaWeb\\JWfileProjects\\yeldPractice\\src\\main\\resources\\templates\\img";
-            // 创建目录
             File directory = new File(path);
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            // 文件地址
+            // 上传文件
+            // 2.上传永久文件
             String filePath = path + File.separator + imageName;
             File imageFile = new File(filePath);
             // 写入图片文件
@@ -142,9 +154,24 @@ public class UserUsageController {
     }
 
     // 用户修改自己发布的商品信息(?)
-    // TODO:未完成涉及图片上传，待完善。
+    @PostMapping("selectGoodByGid")
+    public @ResponseBody Goods selectGoodByGid(int gid){
+        return userUseDao.selectGoodByGid(gid);
+    }
     @PostMapping("setMyGood")
-    public @ResponseBody int setMyGood(@RequestBody Goods goods){
+    public @ResponseBody int setMyGood(@RequestBody Goods goods,HttpSession session){
+        System.out.println(goods);
+        // 处理图片上传,得到存储到数据库中的数据
+        String imagePath = saveImage(goods.getGimg(),session);
+
+        if (goods.getGimg() != null && !goods.getGimg().isEmpty() && !goods.getGimg().startsWith("/img/")) {
+            imagePath = saveImage(goods.getGimg(), session);
+        }
+        // 将图片路径设置到 goods 对象中，保存数据
+        if(goods.getGimg().equals("")){
+            imagePath="/img/OIP-C.jpg";
+        }
+        goods.setGimg(imagePath);
         return userUseDao.setMyGood(goods);
     }
 

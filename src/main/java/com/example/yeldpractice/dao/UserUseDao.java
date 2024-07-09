@@ -144,10 +144,28 @@ public interface UserUseDao {
             @Result(property = "user.uemail", column = "uemail")
     })
     public Post selectByPid(int pid);
+    //
+    @Select("SELECT g.gid, g.gname, g.gprofile, g.gprice, g.gimg, " +
+            "u.uid AS uuid, u.uname AS uname,  u.utel AS utel, u.uemail AS uemail " +
+            "FROM goods g " +
+            "JOIN User u ON g.uid = u.uid "+
+            "WHERE g.gid=#{gid}")
+    @Results({
+            @Result(property = "gid", column = "gid"),
+            @Result(property = "gname", column = "gname"),
+            @Result(property = "gprofile", column = "gprofile"),
+            @Result(property = "gprice", column = "gprice"),
+            @Result(property = "gimg", column = "gimg"),
+            @Result(property = "user.uid", column = "uuid"),
+            @Result(property = "user.uname", column = "uname"),
+            @Result(property = "user.utel", column = "utel"),
+            @Result(property = "user.uemail", column = "uemail")
+    })
+    public Goods selectGoodByGid(int gid);
     @Update("update post set ptitle=#{ptitle},profile=#{profile},pcontent=#{pcontent} where pid=#{pid} and puid=#{user.uid}")
     public int setMyPost(Post post);
     // 用户修改自己的某一个good(涉及上传图片)
-    @Update("update post set gname=#{gname},gprofile=#{gprofile},gprice=#{gprice}, gimg=#{gimg} where gid=#{gid} and uid=#{user.uid}")
+    @Update("update goods set gname=#{gname},gprofile=#{gprofile},gprice=#{gprice}, gimg=#{gimg} where gid=#{gid} and uid=#{user.uid}")
     public int setMyGood(Goods goods);
     // 用户删帖
     @Delete("delete from goods where gid=#{gid}")
